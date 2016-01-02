@@ -12,17 +12,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
-import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
 import java.util.List;
 
 
-public class SettingsActivity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends PreferenceActivity {
 
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
@@ -34,11 +34,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
     private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            // Show the Up button in the action bar.
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//        }
     }
 
     @Override
@@ -136,6 +136,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             return true;
         }
     };
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public Intent getParentActivityIntent() {
+        return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
 
     /**
      * Binds a preference's summary to its value. More specifically, when the
